@@ -78,7 +78,7 @@ CFLAGS+=-I$(CMSIS)/RTOS
 
 CFLAGS+=-I$(PERIPH_LIB)/inc
 
-CFLAGS+=-I../util/Common
+#CFLAGS+=-I../util/Common
 
 CFLAGS+=-I$(ST_EMWIN)/inc
 CFLAGS+=-I$(ST_EMWIN)/Config
@@ -118,7 +118,7 @@ SRC+=$(wildcard $(PROGRAM_USER)/*.c)
 SRC+=$(wildcard $(PROGRAM_DEMO)/*.c)
 SRC+=$(wildcard $(PROGRAM_DEMO)/RES/*.c)
 SRC+=$(wildcard $(PROGRAM_TEST)/*.c)
-SRC+=$(wildcard ../util/Common/*.c)
+#SRC+=$(wildcard ../util/Common/*.c)
 
 SRC+=$(ST_EMWIN)/Config/GUIConf.c \
 	$(ST_EMWIN)/OS/GUI_X_FreeRTOS.c
