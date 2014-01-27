@@ -28,7 +28,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "global_includes.h"
 #include "DIALOG.h"
-#include "Res\startup_res.c"
+#include "Res/startup_res.c"
 
 /* External variables --------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/

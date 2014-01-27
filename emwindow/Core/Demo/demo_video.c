@@ -32,7 +32,7 @@
 #include "GUI_JPEG_Private.h"
 #include "file_utils.h"
 #include "str_utils.h"
-#include "Res\common_res.h"
+#include "Res/common_res.h"
 #include "string.h"
 
 /* External variables --------------------------------------------------------*/

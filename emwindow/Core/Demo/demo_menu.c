@@ -31,14 +31,14 @@
 #include <string.h>
 #include <math.h>
 #include "WM.h"
-#include "Res\menu_res.c"
-#include "Res\clock.c"
-#include "Res\cpu.c"
-#include "Res\game.c"
-#include "Res\image.c"
-#include "Res\info.c"
-#include "Res\multimedia.c"
-#include "Res\background.c"
+#include "Res/menu_res.c"
+#include "Res/clock.c"
+#include "Res/cpu.c"
+#include "Res/game.c"
+#include "Res/image.c"
+#include "Res/info.c"
+#include "Res/multimedia.c"
+#include "Res/background.c"
 #include "time_utils.h"
 #include "cpu_utils.h"
 

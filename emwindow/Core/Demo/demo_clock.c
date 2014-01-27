@@ -29,9 +29,9 @@
 #include "global_includes.h"
 #include "DIALOG.h"
 #include "time_utils.h"
-#include "calendar.h"
-#include "Res\clock_res.c"
-#include "Res\alarmclock.c"
+#include "CALENDAR.h"
+#include "Res/clock_res.c"
+#include "Res/alarmclock.c"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
