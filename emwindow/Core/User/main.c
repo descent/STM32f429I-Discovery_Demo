@@ -28,7 +28,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "bsp.h"
 #include "timers.h"
-#include "test_program.h"
+//#include "test_program.h"
 #include <stddef.h>
 
 /* Private typedef -----------------------------------------------------------*/
