@@ -68,7 +68,7 @@ CFLAGS+= \
 
 LDFLAGS+=-lm -lc -lgcc
 
-CFLAGS+=-L$(ST_EMWIN)/STemWin522_4x9i_CM4_OS_GCC.a
+CFLAGS+=-l$(ST_EMWIN)/Lib/STemWin522_4x9i_CM4_OS_GCC.a
 
 #Lib including
 #CMSIS
@@ -104,20 +104,20 @@ CFLAGS+=-I$(PROGRAM_DEVICE)/STM32F4xx
 CFLAGS+=-I$(PROGRAM_USER)
 CFLAGS+=-I$(PROGRAM_DEMO)
 CFLAGS+=-I$(PROGRAM_DEMO)/Res
-CFLAGS+=-I$(PROGRAM_TEST)
+#CFLAGS+=-I$(PROGRAM_TEST)
 
 INC_HEADERS=$(PROGRAM_CONFIG)/*.h \
 		$(PROGRAM_DEVICE)/STM32F4xx/*.h \
 		$(PROGRAM_USER)/*.h \
 		$(PROGRAM_DEMO)/Res/*.h \
-		$(PROGRAM_TEST)/*.h \
+#		$(PROGRAM_TEST)/*.h \
 
 #Major programs source code
 SRC+=$(wildcard $(PROGRAM_DEVICE)/*.c)
 SRC+=$(wildcard $(PROGRAM_USER)/*.c)
 SRC+=$(wildcard $(PROGRAM_DEMO)/*.c)
 SRC+=$(wildcard $(PROGRAM_DEMO)/RES/*.c)
-SRC+=$(wildcard $(PROGRAM_TEST)/*.c)
+#SRC+=$(wildcard $(PROGRAM_TEST)/*.c)
 #SRC+=$(wildcard ../util/Common/*.c)
 
 SRC+=$(ST_EMWIN)/Config/GUIConf.c \
@@ -194,10 +194,10 @@ $(BIN_IMAGE):$(EXECUTABLE)
 STARTUP_OBJ = startup_stm32f4xx.o
 
 $(STARTUP_OBJ): $(STARTUP)
-	$(CC) $(CFLAGS) $^ -c $(STARTUP)
+	$(CC) -Wl,--start-group $(CFLAGS) $^ -c $(STARTUP) -Wl,--end-group
 
 $(EXECUTABLE):$(SRC) $(STARTUP_OBJ) ${INC_HEADERS}
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CC) -Wl,--start-group $(CFLAGS) $^ -o $@ $(LDFLAGS) -Wl,--end-group
 
 #Make clean
 clean:
