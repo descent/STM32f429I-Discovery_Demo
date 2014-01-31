@@ -39,11 +39,11 @@ STM32F429I_DISCOVERY=../util/STM32F429I-Discovery
 
 #Major programs
 PROGRAM_LIB=./Core/Lib
-PROGRAM_CONFIG = ./Config
-PROGRAM_DEVICE = ./Core/Devices
-PROGRAM_USER = ./Core/User
-iPROGRAM_DEMO = ./Core/Demo
-PROGRAM_TEST = ./Core/Test_Program
+PROGRAM_CONFIG=./Config
+PROGRAM_DEVICE=./Core/Devices
+PROGRAM_USER =./Core/User
+PROGRAM_DEMO=./Core/Demo
+PROGRAM_TEST=./Core/Test_Program
 
 STARTUP=./startup_stm32f429_439xx.s
 #=====================================================================================#
@@ -67,13 +67,14 @@ SRC+=$(STARTUP)
 #CMSIS
 CFLAGS+=-I$(CMSIS)/Device/ST/STM32F4xx/Include
 CFLAGS+=-I$(CMSIS)/Include
-SRC+=-I$(CMSIS)/Lib/GCC/libarm_cortexM4lf_math.a
+SRC+=$(CMSIS)/Lib/GCC/libarm_cortexM4lf_math.a
 
 #ST emWindow
 CFLAGS+=-I$(ST_EMWIN)/Config
 SRC+=$(ST_EMWIN)/Config/*.c
-SRC+=$(ST_EMWIN)/inc
+CFLAGS+=-I$(ST_EMWIN)/inc
 SRC+=$(ST_EMWIN)/Lib/STemWin522_4x9i_CM4_OS_GCC.a
+SRC+=$(ST_EMWIN)/OS/*.c
 
 #STM32F4xx STD Periph
 CFLAGS+=-DUSE_STDPERIPH_DRIVER
@@ -101,12 +102,12 @@ SRC+=$(PERIPH_LIB)/src/misc.c \
 #USB_DEVICE
 CFLAGS+=-I$(USB_DEVICE)/Core/inc
 SRC+=$(USB_DEVICE)/Core/src/*.c
-CFLAGS+=-I$(USB_DEVICE)/Class/audio/inc
-SRC+=$(USB_DEVICE)/Class/audio/src/*.c
-CFLAGS+=-I$(USB_DEVICE)/Class/cdc/inc
-SRC+=$(USB_DEVICE)/Class/cdc/src/*.c
-CFLAGS+=-I$(USB_DEVICE)/Class/dfu/inc
-SRC+=$(USB_DEVICE)/Class/dfu/src/*.c
+#CFLAGS+=-I$(USB_DEVICE)/Class/audio/inc
+#SRC+=$(USB_DEVICE)/Class/audio/src/*.c
+#CFLAGS+=-I$(USB_DEVICE)/Class/cdc/inc
+#SRC+=$(USB_DEVICE)/Class/cdc/src/*.c
+#CFLAGS+=-I$(USB_DEVICE)/Class/dfu/inc
+#SRC+=$(USB_DEVICE)/Class/dfu/src/*.c
 CFLAGS+=-I$(USB_DEVICE)/Class/hid/inc
 SRC+=$(USB_DEVICE)/Class/hid/src/*.c
 CFLAGS+=-I$(USB_DEVICE)/Class/msc/inc
@@ -122,7 +123,7 @@ SRC+=$(USB_HOST)/Class/MSC/src/*.c
 
 #USB_OTG
 CFLAGS+=-I$(USB_OTG)/inc
-SRC+=$(USB_OTG)/src/*.c
+#SRC+=$(USB_OTG)/src/*.c
 
 #Common
 
@@ -136,9 +137,7 @@ SRC+=$(STM32F429I_DISCOVERY)/stm32f429i_discovery.c \
 
 
 CFLAGS+=-I$(FATFS_INC)
-SRC+=$(FATFS_SRC)/ff.c \
-	$(FATFS_SRC)/*.c \
-	$(FATFS_SRC)/option/*.c
+#SRC+=$(FATFS_SRC)/*.c \
 
 CFLAGS+=-I$(FREERTOS_INC)
 CFLAGS+=-I$(FREERTOS_PORT_INC)
@@ -150,7 +149,29 @@ SRC+=$(FREERTOS_SRC)/croutine.c \
 	$(FREERTOS_SRC)/portable/MemMang/heap_2.c \
 	$(FREERTOS_SRC)/portable/GCC/ARM_CM4F/port_cm4.c
 
+#Major programs
+CFLAGS+=-I$(PROGRAM_CONFIG)
+CFLAGS+=-I$(PROGRAM_LIB)
+RC+=$(PROGRAM_LIB)/*.c
+CFLAGS+=-I$(PROGRAM_DEVICE)/STM32F4xx
+SRC+=$(PROGRAM_DEVICE)/STM32F4xx/*.c
+CFLAGS+=-I$(PROGRAM_USER)
+SRC+=$(PROGRAM_USER)/*.c
+CFLAGS+=-I$(PROGRAM_DEMO)
+SRC+=$(PROGRAM_DEMO)/*.c
+CFLAGS+=-I$(PROGRAM_DEMO)/Res
+SRC+=$(PROGRAM_DEMO)/Res/*.c
+CFLAGS+=-I$(PROGRAM_TEST)
 #=====================================================================================#
+
+#Make all
+all:$(BIN_IMAGE)
+
+$(BIN_IMAGE):$(EXECUTABLE)
+	$(OBJCOPY) -O binary $^ $@
+
+$(EXECUTABLE):$(SRC)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 #Make clean
 clean:
