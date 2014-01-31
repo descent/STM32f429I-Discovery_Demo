@@ -172,7 +172,7 @@ $(BIN_IMAGE):$(EXECUTABLE)
 	$(OBJCOPY) -O binary $^ $@
 
 $(EXECUTABLE):$(SRC)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(CC) -o $@ -Wl,--start-group $(CFLAGS) $^ $(LIBS) -Wl,--end-group
 
 #Make clean
 clean:
