@@ -31,12 +31,6 @@ USB_OTG=../lib/STM32_USB_OTG_Driver
 #STM32F4xx STD Periph
 PERIPH_LIB=../lib/STM32F4xx_StdPeriph_Driver
 
-#ST emWindow
-ST_EMWIN=../lib/STemWinLibrary522_4x9i
-
-#STM32F429I-Discovery Util
-STM32F429I_DISCOVERY=../util/STM32F429I-Discovery
-
 #Major programs
 PROGRAM_LIB=./Core/Lib
 PROGRAM_CONFIG=./Config
@@ -44,6 +38,12 @@ PROGRAM_DEVICE=./Core/Devices
 PROGRAM_USER =./Core/User
 PROGRAM_DEMO=./Core/Demo
 PROGRAM_TEST=./Core/Test_Program
+
+#ST emWindow
+ST_EMWIN=../lib/STemWinLibrary522_4x9i
+
+#STM32F429I-Discovery Util
+STM32F429I_DISCOVERY=../util/STM32F429I-Discovery
 
 STARTUP=./startup_stm32f429_439xx.s
 #=====================================================================================#
@@ -162,6 +162,7 @@ SRC+=$(PROGRAM_DEMO)/*.c
 CFLAGS+=-I$(PROGRAM_DEMO)/Res
 SRC+=$(PROGRAM_DEMO)/Res/*.c
 CFLAGS+=-I$(PROGRAM_TEST)
+SRC+=$(PROGRAM_TEST)/*.c
 #=====================================================================================#
 
 #Make all
