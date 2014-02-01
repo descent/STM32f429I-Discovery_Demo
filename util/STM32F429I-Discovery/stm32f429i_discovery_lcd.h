@@ -36,6 +36,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
+#include "stm32f4xx_gpio.h"
 #include "stm32f429i_discovery.h"
 #include "stm32f429i_discovery_sdram.h"
 #include "../Common/fonts.h"
