@@ -11,10 +11,12 @@ INC=-I../../Config/ -I../../../util/Third_Party/FreeRTOS/Source/include/ -I../..
 -I../../../lib/STemWinLibrary522_4x9i/inc/ \
 -I../../../lib/STemWinLibrary522_4x9i/Config/ \
 
-libemwin.a: $(OBJS)
+TARGET=libemwindow.a
+
+$(TARGET): $(OBJS)
 	arm-none-eabi-ar -rcs $@ $^
 %.o: %.c
 	arm-none-eabi-gcc $(INC) $(MYCFLAGS) -DSTM32F429_439xx -c $<
 	
 clean:
-	rm -rf *.o libemwin.a
+	rm -rf *.o $(TARGET)
